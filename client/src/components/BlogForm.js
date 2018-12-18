@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect, } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Container } from 'semantic-ui-react';
 
 class BlogForm extends React.Component {
   state = { name: "", body: "", };
@@ -33,26 +32,25 @@ class BlogForm extends React.Component {
           display: 'flex',
           justifyContent: 'center'
         }}>Add Blog</h3>
-        <Form onSubmit={this.handleSubmit}>
-        <hr />
-          <input
+        <Container>
+          
+        <Form.Input onSubmit={this.handleSubmit}
             name='name'
             autoFocus
             value={name}
             placeholder="Name"
             title="Blog"
             onChange={this.handleChange} />
-            </Form>
-        <Form onSubmit={this.handleSubmit}>
-          <input
+        <Form.TextArea onSubmit={this.handleSubmit}
             name='body'
             value={body}
             placeholder="Body"
             title="Body"
-            onChange={this.handleChange} />
-        </Form>
+            onChange={this.handleChange} 
+            />
         <br />
           <Button onClick={this.handleSubmit}>Submit</Button>
+            </Container>
       </div>
     )
   }

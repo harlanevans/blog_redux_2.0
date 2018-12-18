@@ -4,22 +4,25 @@ import Blogs from './components/Blogs';
 import BlogForm from './components/BlogForm';
 import { Container } from 'semantic-ui-react';
 import Blog from './components/Blog';
+import NavBar from './components/NavBar';
+import Home from './components/Home';
+import FetchBlog from './components/FetchBlog';
 
 
 class App extends Component {
   render() {
     return (
-      <Container>
+      <>
+      <NavBar />
         <br />
         <Fragment>
           <Switch>
-            <Route exact path='/' component={Blogs} />
-            <Route exact path='/Blogs' component={Blogs} />
-            <Route exact path='/blogform' component={BlogForm} />
-            <Route exact path='/blog/:id' component={Blog} />
+            <Route exact path='/' component={Home} />
+            <Route path='/blogs' component={FetchBlog} />
+
           </Switch>
         </Fragment>
-      </Container>
+      </>
     );
   }
 }

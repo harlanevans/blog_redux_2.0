@@ -2,8 +2,24 @@ import axios from 'axios';
 
 // ACTIONS
 
+const BLOGS = 'BLOGS';
+const ADD_BLOG = 'ADD_BLOG';
+const UPDATE_BLOG = 'UPDATE_BLOG';
+const DELETE = 'DELETE';
 
+export const getBlogs = () => {
+  return (dispatch) => {
+    axios.get('/api/blogs')
+      .then( res => dispatch({ type: BLOGS, blogs: res.data }) )
+  }
+}
 
+export const addBlog = (blog) => {
+  return (dispatch) => {
+    axios.post('./api/blogs', { blog, })
+      .then(res => dispatch({ type: ADD_BLOG, blog: res.data }))
+  }
+}
 
 // REDUCER
 export default (state = [], action) => {

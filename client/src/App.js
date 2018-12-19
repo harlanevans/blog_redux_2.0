@@ -1,8 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Route, Switch, } from 'react-router-dom';
-import Blogs from './components/Blogs';
 import BlogForm from './components/BlogForm';
-import Blog from './components/Blog';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import FetchBlog from './components/FetchBlog';

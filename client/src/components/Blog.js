@@ -32,7 +32,7 @@ class Blog extends React.Component {
             animated='fade'>
             <Button.Content visible>
               Back to All Blogs
-     </Button.Content>
+           </Button.Content>
             <Button.Content hidden>
               <Icon name='left arrow' />
             </Button.Content>
@@ -59,46 +59,50 @@ class Blog extends React.Component {
           {blog.body}
         </p>
         <br />
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}>
 
-        <Button basic
-          color='black'
-          style={{ fontFamily: "Charm", }}
-          animated='fade'
-          onClick={this.toggleForm}>
+          <Button basic
+            color='black'
+            style={{ fontFamily: "Charm", }}
+            animated='fade'
+            onClick={this.toggleForm}>
 
-          <Button.Content visible>
-            {showForm ? "Cancel" : "Edit"}
-          </Button.Content>
-          <Button.Content hidden >
-            <Icon name='edit' />
-          </Button.Content>
-        </Button>
-        {
-          showForm ?
-            <BlogForm {...blog} closeForm={this.toggleForm} />
-            :
+            <Button.Content visible>
+              {showForm ? "Cancel" : "Edit"}
+            </Button.Content>
+            <Button.Content hidden >
+              <Icon name='edit' />
+            </Button.Content>
+          </Button>
+          {
+            showForm ?
+              <BlogForm {...blog} closeForm={this.toggleForm} />
+              :
 
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}>
-              <br />
-              <Button onClick={this.handleDelete}
-                alignitems='right'
-                basic
-                color='black'
-                style={{ fontFamily: "Charm", }}
-                animated='fade'>
-                <Button.Content visible>
-                  Delete Blog
-                </Button.Content>
-                <Button.Content hidden>
-                  <Icon name='delete' />
-                </Button.Content>
-              </Button>
-            </div>
-        }
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}>
+                <Button onClick={this.handleDelete}
+                  basic
+                  color='black'
+                  style={{ fontFamily: "Charm", }}
+                  animated='fade'>
+                  <Button.Content visible>
+                    Delete Blog
+              </Button.Content>
+                  <Button.Content hidden>
+                    <Icon name='delete' />
+                  </Button.Content>
+                </Button>
+                <br />
+              </div>
+          }
+        </div>
       </Container>
     )
   }

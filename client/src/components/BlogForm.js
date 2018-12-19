@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect, } from 'react-redux';
-import { Form, Button, Container, Icon } from 'semantic-ui-react';
+import { Form, Button, Container, Icon, Header } from 'semantic-ui-react';
 import { addBlog, updateBlog } from '../reducers/blogs';
 
 class BlogForm extends React.Component {
-  initialState = { 
-    name: '', 
-    body: '', 
+  initialState = {
+    name: '',
+    body: '',
   };
 
   state = { ...this.initialState, };
@@ -23,68 +23,58 @@ class BlogForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const blog = { ...this.state };
-    const { dispatch, closeForm, push} = this.props;
+    const { dispatch, closeForm, } = this.props;
     const func = this.props.id ? updateBlog : addBlog;
     dispatch(func(blog));
     closeForm();
-    push("/blogs");
+    debugger
   }
 
   render() {
-
     const { name, body, } = this.state;
 
     return (
-      <div>
-        <br />
-        <h3 style={{
+      <Container>
+        <Header as='h2' style={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          fontFamily: '"Charm", cursive'
+          fontFamily: '"Charm", cursive'}}>
+          Add Blog
+        </Header>
 
-        }}>Add Blog</h3>
-        <Container>
-          <Form onSubmit={this.handleSubmit} >
-
-            <Form.Input
-              style={{ fontFamily: "Charm", }}
-              name='name'
-              autoFocus
-              value={name}
-              placeholder="Name"
-              title="Blog"
-              onChange={this.handleChange} />
-            <Form.TextArea
-              style={{ fontFamily: "Charm", }}
-              name='body'
-              value={body}
-              placeholder="Body"
-              title="Body"
-              onChange={this.handleChange}
+        <Form onSubmit={this.handleSubmit} >
+          <Form.Input
+            name='name'
+            autoFocus
+            value={name}
+            placeholder="Name"
+            onChange={this.handleChange} 
             />
-            <br />
+          <Form.TextArea
+            name='body'
+            value={body}
+            placeholder="Body"
+            onChange={this.handleChange}
+          />
+          <br />
           <Button onClick={this.handleSubmit}
             basic
             color='black'
-            animated='fade'
-            >
+            animated='fade'>
             <Button.Content visible style={{ fontFamily: "Charm", }}>
               Submit
             </Button.Content>
             <Button.Content hidden>
               <Icon name='check' />
             </Button.Content>
+
           </Button>
-            </Form>
-        </Container>
-      </div>
+        </Form>
+      </Container>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return { id: state };
-}
 
-export default connect(mapStateToProps)(BlogForm);
+export default connect()(BlogForm);

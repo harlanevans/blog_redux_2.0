@@ -16,26 +16,28 @@ class Blogs extends React.Component {
   blogs = () => {
     return this.props.blogs.map(blog => (
       <Card raised
-      color='blue' 
-      key={blog.id}>
+        color='blue'
+        key={blog.id}>
         <Card.Content>
 
-          <Card.Header style={{fontFamily: "Charm",}}>
+          <Card.Header style={{ fontFamily: "Charm", }}>
             {blog.name}
           </Card.Header>
           <br />
-          <div style={{fontFamily: "Charm",}}>
+          <div style={{ fontFamily: "Charm", }}>
             Blog Post:
             </div>
-        <Card.Description style={{fontFamily: "Charm",}}>
+          <Card.Description style={{ fontFamily: "Charm", }}>
             "<i>{blog.body}</i>"
         </Card.Description>
         </Card.Content>
-          <Card.Content extra style={{fontFamily: "Charm",}}>
-            <Link to={`/blogs/${blog.id}`}>
-              View Blog
+        <Card.Content extra style={{ fontFamily: "Charm", }}>
+          <Link to={`/blogs/${blog.id}`}>
+          <Button.Content>
+            View Blog
+          </Button.Content>
             </Link>
-          </Card.Content>
+        </Card.Content>
       </Card>
     ))
   }
@@ -52,50 +54,70 @@ class Blogs extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             fontFamily: '"Charm", cursive'
-          }}
-        >Blogs</Header>
+          }}>
+          Blogs
+            </Header>
         <hr />
         <br />
         <div style={{
           display: 'flex',
-          justifyContent: 'space-between',
         }}>
-        <Link to={'/blogform'}>
-          <Button basic 
-          color='black' 
-          animated='fade'
-          >
-          <Button.Content visible style={{fontFamily: "Charm",}}>
-            Add a Blog Post
+          <br />
+            <div>
+
+              {
+                showForm ? 
+                <Button onClick={this.toggleForm}
+                basic
+                color='black'
+                style={{ fontFamily: "Charm", }}
+                animated='fade'>
+                <Button.Content visible>
+                Cancel 
+                </Button.Content>
+            <Button.Content hidden>
+              <Icon name='cancel' />
             </Button.Content>
-          <Button.Content hidden>
-           <Icon name='add' />
+                </Button>
+                
+                :
+                <Button onClick={this.toggleForm}
+                basic
+                color='black'
+                style={{ fontFamily: "Charm", }}
+                animated='fade'>
+
+              <Button.Content visible> 
+              Add Blog  
             </Button.Content>
-            </Button>
-        </Link>
-        <br />
-        <br />
-          <Button onClick={this.toggleForm}
-          basic
-          color='black'
-          style={{ fontFamily: "Charm", }}
-          animated='fade'>
-          <Button.Content visible>
-          { showForm ? "Hide Form" : "Show Form" }
-         </Button.Content>
-          <Button.Content hidden>
-            <Icon name='edit' />          
-         </Button.Content>
-        </Button>
+            <Button.Content hidden>
+              <Icon name='edit' />
+            </Button.Content>
+                </Button>
+            }
+            </div>
+            {/* <Link to={'/blogform'}>
+            <Button basic 
+            color='black' 
+            animated='fade'
+            >
+            <Button.Content visible style={{fontFamily: "Charm",}}>
+              Add a Blog Post
+              </Button.Content>
+            <Button.Content hidden>
+             <Icon name='add' />
+              </Button.Content>
+              </Button>
+          </Link> */}
         </div>
         <br />
         <br />
         {
-          showForm ? 
-          <BlogForm closeForm={this.toggleForm} />
-          :
-          <Card.Group itemsPerRow={4}>
-              { this.blogs() }
+          showForm ?
+            <BlogForm closeForm={this.toggleForm} />
+            :
+            <Card.Group itemsPerRow={4}>
+              {this.blogs()}
             </Card.Group>
         }
       </Container>

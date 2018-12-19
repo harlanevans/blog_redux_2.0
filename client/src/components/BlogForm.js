@@ -16,7 +16,6 @@ class BlogForm extends React.Component {
     const { name, body, } = this.state;
     const blog = { name, body, id, };
     dispatch({ type: "ADD_BLOG", blog: { name, body } });
-    dispatch({ type: "INC_ID" });
     this.setState({ name: "", body: "", })
     this.props.history.push(`/blogs`);
   }
@@ -33,7 +32,8 @@ class BlogForm extends React.Component {
           justifyContent: 'center'
         }}>Add Blog</h3>
         <Container>
-          
+          <Form>
+
         <Form.Input onSubmit={this.handleSubmit}
             name='name'
             autoFocus
@@ -49,6 +49,7 @@ class BlogForm extends React.Component {
             onChange={this.handleChange} 
             />
         <br />
+            </Form>
           <Button onClick={this.handleSubmit}>Submit</Button>
             </Container>
       </div>

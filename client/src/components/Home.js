@@ -15,7 +15,9 @@ const Home = () => (
       <Link to="/blogs"> My Blogs</Link>
     </Header>
         <hr />
-        About Me: {''}
+        <div style={{fontFamily: '"Charm", cursive'}}>
+          About Me:
+          </div>
         <br />
         <p style={{
           fontFamily: 'Charm',

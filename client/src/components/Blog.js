@@ -1,4 +1,5 @@
 import React from 'react';
+import BlogForm from './BlogForm';
 import { connect, } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteBlog, } from "../reducers/blogs";
@@ -6,6 +7,8 @@ import { Button, Icon, Container, Header, } from 'semantic-ui-react';
 
 class Blog extends React.Component {
   state = { showForm: false, };
+
+  toggleForm = () => this.setState({ showForm: !this.state.showForm, });
 
 
   handleDelete = () => {
@@ -15,11 +18,26 @@ class Blog extends React.Component {
   }
 
   render() {
+    const { showForm, } = this.state;
     const { blog = {}, } = this.props;
 
     return (
 
       <Container>
+        <Link to="/blogs">
+          <Button
+            basic
+            color='black'
+            style={{ fontFamily: "Charm", }}
+            animated='fade'>
+            <Button.Content visible>
+              Back to All Blogs
+     </Button.Content>
+            <Button.Content hidden>
+              <Icon name='left arrow' />
+            </Button.Content>
+          </Button>
+        </Link>
         <Header as='h1'
           style={{
             display: 'flex',
@@ -41,40 +59,46 @@ class Blog extends React.Component {
           {blog.body}
         </p>
         <br />
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}>
 
-          <Link to="/blogs">
-            <Button
-              basic
-              color='black'
-              style={{ fontFamily: "Charm", }}
-              animated='fade'>
-              <Button.Content visible>
-                Back to All Blogs
-           </Button.Content>
-              <Button.Content hidden>
-                <Icon name='left arrow' />
-              </Button.Content>
-            </Button>
-          </Link>
+        <Button basic
+          color='black'
+          style={{ fontFamily: "Charm", }}
+          animated='fade'
+          onClick={this.toggleForm}>
 
-          <Button onClick={this.handleDelete}
-            alignItems='right'
-            basic
-            color='black'
-            style={{ fontFamily: "Charm", }}
-            animated='fade'>
-            <Button.Content visible>
-              Delete Blog
-           </Button.Content>
-            <Button.Content hidden>
-              <Icon name='delete' />
-            </Button.Content>
-          </Button>
-        </div>
+          <Button.Content visible>
+            {showForm ? "Cancel" : "Edit"}
+          </Button.Content>
+          <Button.Content hidden >
+            <Icon name='edit' />
+          </Button.Content>
+        </Button>
+        {
+          showForm ?
+            <BlogForm {...blog} closeForm={this.toggleForm} />
+            :
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}>
+              <br />
+              <Button onClick={this.handleDelete}
+                alignitems='right'
+                basic
+                color='black'
+                style={{ fontFamily: "Charm", }}
+                animated='fade'>
+                <Button.Content visible>
+                  Delete Blog
+                </Button.Content>
+                <Button.Content hidden>
+                  <Icon name='delete' />
+                </Button.Content>
+              </Button>
+            </div>
+        }
       </Container>
     )
   }

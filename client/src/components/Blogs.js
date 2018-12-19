@@ -1,5 +1,5 @@
 import React from 'react';
-import Blog from './Blog';
+import BlogForm from './BlogForm';
 import { connect, } from 'react-redux';
 import { Button, Card, Container, Header, Icon } from 'semantic-ui-react';
 import { Link, } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { getBlogs, } from '../reducers/blogs';
 
 
 class Blogs extends React.Component {
+  state = { showForm: false, };
 
   componentDidMount() {
     this.props.dispatch(getBlogs());
@@ -39,8 +40,10 @@ class Blogs extends React.Component {
     ))
   }
 
+  toggleForm = () => this.setState({ showForm: !this.state.showForm, });
 
   render() {
+    const { showForm, } = this.state;
     return (
       <Container>
         <Header as='h1'
@@ -53,6 +56,10 @@ class Blogs extends React.Component {
         >Blogs</Header>
         <hr />
         <br />
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}>
         <Link to={'/blogform'}>
           <Button basic 
           color='black' 
@@ -68,9 +75,29 @@ class Blogs extends React.Component {
         </Link>
         <br />
         <br />
-        <Card.Group itemsPerRow={3}>
-          {this.blogs()}
-        </Card.Group>
+          <Button onClick={this.toggleForm}
+          basic
+          color='black'
+          style={{ fontFamily: "Charm", }}
+          animated='fade'>
+          <Button.Content visible>
+          { showForm ? "Hide Form" : "Show Form" }
+         </Button.Content>
+          <Button.Content hidden>
+            <Icon name='edit' />          
+         </Button.Content>
+        </Button>
+        </div>
+        <br />
+        <br />
+        {
+          showForm ? 
+          <BlogForm closeForm={this.toggleForm} />
+          :
+          <Card.Group itemsPerRow={4}>
+              { this.blogs() }
+            </Card.Group>
+        }
       </Container>
     )
   }

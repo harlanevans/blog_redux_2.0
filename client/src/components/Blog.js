@@ -81,7 +81,6 @@ class Blog extends React.Component {
             showForm ?
               <BlogForm {...blog} closeForm={this.toggleForm} />
               :
-
               <div
                 style={{
                   display: 'flex',
